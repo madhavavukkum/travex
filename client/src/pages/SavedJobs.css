@@ -1,0 +1,88 @@
+.saved-jobs-page {
+  padding-top: 100px;
+}
+
+.saved-jobs-hero {
+  background-color: var(--primary);
+  color: white;
+  padding: var(--space-6) 0;
+}
+
+.saved-jobs-hero h1 {
+  color: white;
+  margin-bottom: var(--space-2);
+  font-weight: 600;
+}
+
+.saved-jobs-hero p {
+  color: rgba(255, 255, 255, 0.9);
+  font-size: 1.2rem;
+}
+
+.saved-job-card {
+  border: none;
+  border-radius: var(--radius-md);
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+  transition: var(--transition);
+}
+
+.saved-job-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 15px 30px rgba(0, 0, 0, 0.1);
+}
+
+.saved-job-card .card-title a {
+  color: var(--gray-900);
+  text-decoration: none;
+  transition: var(--transition);
+}
+
+.saved-job-card .card-title a:hover {
+  color: var(--primary);
+}
+
+.job-tag {
+  display: inline-block;
+  padding: 0.25rem 0.75rem;
+  border-radius: 50px;
+  background-color: var(--primary-light);
+  color: white;
+  font-size: 0.8rem;
+}
+
+.job-meta {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-2);
+  color: var(--gray-700);
+  font-size: 0.9rem;
+}
+
+.job-location::before {
+  content: '📍 ';
+}
+
+.job-type::before {
+  content: '🕒 ';
+}
+
+.job-remote::before {
+  content: '🌐 ';
+}
+
+.job-tag-badge {
+  padding: 0.5em 0.8em;
+  font-weight: 400;
+  border: 1px solid var(--gray-300);
+}
+
+.saved-date {
+  border-top: 1px solid var(--gray-200);
+  padding-top: var(--space-2);
+}
+
+.no-saved-jobs {
+  padding: var(--space-5);
+  background-color: var(--gray-100);
+  border-radius: var(--radius-md);
+}

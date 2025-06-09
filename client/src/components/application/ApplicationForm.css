@@ -1,0 +1,138 @@
+.application-form-page {
+  padding-top: 100px;
+  background-color: var(--gray-100);
+  min-height: 100vh;
+}
+
+.application-header h2 {
+  color: var(--primary);
+  margin-bottom: var(--space-2);
+}
+
+.progress-section {
+  background-color: white;
+  border-radius: var(--radius-md);
+  padding: var(--space-3);
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
+}
+
+.step-indicators {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  position: relative;
+}
+
+.step-indicators::before {
+  content: '';
+  position: absolute;
+  top: 20px;
+  left: 0;
+  right: 0;
+  height: 2px;
+  background-color: var(--gray-300);
+  z-index: 1;
+}
+
+.step-indicator {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  position: relative;
+  z-index: 2;
+}
+
+.step-number {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  background-color: var(--gray-300);
+  color: white;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: 600;
+  margin-bottom: var(--space-1);
+  transition: var(--transition);
+}
+
+.step-indicator.active .step-number {
+  background-color: var(--primary);
+}
+
+.step-label {
+  font-size: 0.9rem;
+  color: var(--gray-600);
+  font-weight: 500;
+}
+
+.step-indicator.active .step-label {
+  color: var(--primary);
+}
+
+.step-card {
+  border: none;
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+  border-radius: var(--radius-md);
+}
+
+.step-card .card-header {
+  background-color: var(--primary);
+  color: white;
+  border-radius: var(--radius-md) var(--radius-md) 0 0;
+}
+
+.step-card .card-header h4 {
+  margin: 0;
+  color: white;
+}
+
+.company-card {
+  background-color: var(--gray-100);
+  border: 1px solid var(--gray-300);
+}
+
+.form-navigation {
+  background-color: white;
+  border-radius: var(--radius-md);
+  padding: var(--space-3);
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
+}
+
+.application-summary {
+  background-color: var(--gray-100);
+  padding: var(--space-3);
+  border-radius: var(--radius-md);
+  border-left: 4px solid var(--primary);
+}
+
+.application-summary h5 {
+  color: var(--primary);
+  margin-bottom: var(--space-2);
+}
+
+.application-summary p {
+  margin-bottom: var(--space-1);
+}
+
+@media (max-width: 768px) {
+  .step-indicators {
+    flex-wrap: wrap;
+    gap: var(--space-2);
+  }
+  
+  .step-indicators::before {
+    display: none;
+  }
+  
+  .step-indicator {
+    flex-direction: row;
+    gap: var(--space-1);
+  }
+  
+  .step-number {
+    width: 30px;
+    height: 30px;
+    margin-bottom: 0;
+  }
+}

@@ -1,0 +1,113 @@
+/* Hero Section styles are in HeroSection.css */
+
+/* Featured Jobs Section */
+.featured-jobs {
+  background-color: var(--gray-100);
+}
+
+.section-title {
+  margin-bottom: var(--space-2);
+  font-weight: 600;
+  position: relative;
+  display: inline-block;
+}
+
+.section-title::after {
+  content: '';
+  position: absolute;
+  bottom: -10px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 80px;
+  height: 3px;
+  background-color: var(--primary);
+}
+
+.section-subtitle {
+  color: var(--gray-700);
+  margin-bottom: var(--space-4);
+  max-width: 600px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.job-card {
+  border: none;
+  border-radius: var(--radius-md);
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+  transition: var(--transition);
+  overflow: hidden;
+}
+
+.job-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 15px 30px rgba(0, 0, 0, 0.1);
+}
+
+.job-card .card-title {
+  font-size: 1.3rem;
+  margin-bottom: var(--space-2);
+}
+
+.job-tag {
+  display: inline-block;
+  padding: 0.25rem 0.75rem;
+  border-radius: 50px;
+  background-color: var(--primary-light);
+  color: white;
+  font-size: 0.8rem;
+  margin-bottom: var(--space-2);
+}
+
+.job-details {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-2);
+  margin-bottom: var(--space-2);
+  font-size: 0.9rem;
+  color: var(--gray-600);
+}
+
+.job-location::before {
+  content: '📍 ';
+}
+
+.job-type::before {
+  content: '🕒 ';
+}
+
+.card-footer {
+  background-color: transparent;
+  border-top: 1px solid var(--gray-200);
+  padding: var(--space-3);
+}
+
+/* CTA Section */
+.cta-section {
+  background: linear-gradient(135deg, var(--primary) 0%, var(--primary-dark) 100%);
+  color: white;
+  padding: var(--space-6) 0;
+  margin-bottom: calc(-1 * var(--space-5)); /* Negative margin to remove space between CTA and footer */
+}
+
+.cta-section h2 {
+  color: white;
+  margin-bottom: var(--space-3);
+  font-weight: 600;
+}
+
+.cta-section p {
+  color: rgba(255, 255, 255, 0.8);
+  margin-bottom: var(--space-3);
+  font-size: 1.1rem;
+}
+
+.cta-buttons {
+  margin-bottom: var(--space-4);
+}
+
+@media (max-width: 991.98px) {
+  .cta-section .col-lg-5 {
+    margin-top: var(--space-4);
+  }
+}

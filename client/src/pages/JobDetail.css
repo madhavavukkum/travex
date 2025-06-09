@@ -1,0 +1,253 @@
+.job-detail-header {
+  background-color: var(--primary);
+  color: white;
+  padding: var(--space-5) 0;
+  position: relative;
+}
+
+.back-link {
+  display: inline-block;
+  margin-bottom: var(--space-3);
+}
+
+.back-link a {
+  color: rgba(255, 255, 255, 0.9);
+  text-decoration: none;
+  transition: var(--transition);
+}
+
+.back-link a:hover {
+  color: white;
+}
+
+.job-detail-meta {
+  margin-bottom: var(--space-2);
+}
+
+.job-tag {
+  display: inline-block;
+  padding: 0.25rem 0.75rem;
+  border-radius: 50px;
+  background-color: rgba(255, 255, 255, 0.2);
+  color: white;
+  font-size: 0.8rem;
+  margin-right: var(--space-2);
+}
+
+.job-remote-badge {
+  display: inline-block;
+  padding: 0.25rem 0.75rem;
+  border-radius: 50px;
+  background-color: var(--accent);
+  color: white;
+  font-size: 0.8rem;
+}
+
+.job-detail-header h1 {
+  color: white;
+  margin-bottom: var(--space-3);
+  font-weight: 600;
+}
+
+.job-info {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-3);
+}
+
+.job-info-item {
+  display: flex;
+  flex-direction: column;
+  padding-right: var(--space-3);
+}
+
+.job-info-label {
+  font-size: 0.8rem;
+  color: rgba(255, 255, 255, 0.7);
+}
+
+.job-info-value {
+  font-weight: 500;
+}
+
+.job-detail-content {
+  padding: var(--space-5) 0;
+}
+
+.job-description {
+  background-color: white;
+  border-radius: var(--radius-md);
+  padding: var(--space-4);
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+}
+
+.job-description h2 {
+  margin-bottom: var(--space-3);
+  font-size: 1.8rem;
+}
+
+.job-description h4 {
+  margin-top: var(--space-4);
+  margin-bottom: var(--space-2);
+  font-size: 1.3rem;
+}
+
+.job-description ul {
+  margin-bottom: var(--space-3);
+}
+
+.job-description li {
+  margin-bottom: var(--space-1);
+}
+
+.job-tags-section {
+  margin-top: var(--space-4);
+  padding-top: var(--space-3);
+  border-top: 1px solid var(--gray-200);
+}
+
+.job-tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-1);
+  margin-top: var(--space-2);
+}
+
+.job-tag-badge {
+  margin-right: var(--space-1);
+  margin-bottom: var(--space-1);
+  padding: 0.5em 0.8em;
+  font-weight: 400;
+  background-color: var(--gray-100);
+  color: var(--gray-700);
+  border: 1px solid var(--gray-300);
+}
+
+.job-apply-container {
+  position: sticky;
+  top: 90px;
+}
+
+.job-apply-card, .company-card, .share-card {
+  background-color: white;
+  border-radius: var(--radius-md);
+  padding: var(--space-3);
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+  margin-bottom: var(--space-3);
+}
+
+.job-apply-card {
+  background-color: var(--gray-100);
+  border-left: 3px solid var(--primary);
+}
+
+.job-apply-card h3 {
+  margin-bottom: var(--space-2);
+  font-size: 1.3rem;
+}
+
+.job-apply-card p {
+  margin-bottom: var(--space-3);
+}
+
+.company-card h4, .share-card h4 {
+  margin-bottom: var(--space-2);
+  font-size: 1.1rem;
+}
+
+.share-buttons {
+  display: flex;
+}
+
+.loading-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  min-height: 400px;
+}
+
+.spinner {
+  width: 40px;
+  height: 40px;
+  border: 3px solid rgba(0, 0, 0, 0.1);
+  border-radius: 50%;
+  border-top-color: var(--primary);
+  animation: spin 1s ease-in-out infinite;
+  margin-bottom: var(--space-2);
+}
+
+@keyframes spin {
+  to { transform: rotate(360deg); }
+}
+
+.related-jobs {
+  background-color: var(--gray-100);
+  padding: var(--space-5) 0;
+}
+
+.related-job-card {
+  background-color: white;
+  border-radius: var(--radius-md);
+  padding: var(--space-3);
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+  height: 100%;
+  transition: var(--transition);
+}
+
+.related-job-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 15px 30px rgba(0, 0, 0, 0.1);
+}
+
+.related-job-card h3 {
+  font-size: 1.2rem;
+  margin: var(--space-2) 0;
+}
+
+.related-job-card h3 a {
+  color: var(--gray-900);
+  text-decoration: none;
+  transition: var(--transition);
+}
+
+.related-job-card h3 a:hover {
+  color: var(--primary);
+}
+
+.related-job-card .job-meta {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-2);
+  margin-bottom: var(--space-2);
+  color: var(--gray-700);
+  font-size: 0.85rem;
+}
+
+.related-job-card p {
+  margin-bottom: var(--space-3);
+  font-size: 0.9rem;
+  color: var(--gray-700);
+}
+
+@media (max-width: 991.98px) {
+  .job-info {
+    flex-direction: column;
+    gap: var(--space-1);
+  }
+  
+  .job-info-item {
+    flex-direction: row;
+    align-items: center;
+  }
+  
+  .job-info-label {
+    min-width: 120px;
+    margin-right: var(--space-2);
+  }
+  
+  .job-apply-container {
+    position: static;
+    margin-top: var(--space-4);
+  }
+}

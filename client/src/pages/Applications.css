@@ -1,0 +1,49 @@
+.applications-page {
+  padding-top: 100px;
+}
+
+.applications-hero {
+  background-color: var(--primary);
+  color: white;
+  padding: var(--space-6) 0;
+}
+
+.applications-hero h1 {
+  color: white;
+  margin-bottom: var(--space-2);
+  font-weight: 600;
+}
+
+.applications-hero p {
+  color: rgba(255, 255, 255, 0.9);
+  font-size: 1.2rem;
+}
+
+.application-card {
+  border: none;
+  border-radius: var(--radius-md);
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+  transition: var(--transition);
+}
+
+.application-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 15px 30px rgba(0, 0, 0, 0.1);
+}
+
+.application-details {
+  background-color: var(--gray-100);
+  padding: var(--space-3);
+  border-radius: var(--radius-md);
+}
+
+.application-details p {
+  margin-bottom: var(--space-1);
+  font-size: 0.9rem;
+}
+
+.no-applications {
+  padding: var(--space-5);
+  background-color: var(--gray-100);
+  border-radius: var(--radius-md);
+}

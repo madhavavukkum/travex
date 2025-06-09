@@ -1,0 +1,85 @@
+/* navbar */
+
+.custom-navbar {
+  background: rgba(0, 0, 0, 0.2); /* Translucent dark base */
+  backdrop-filter: blur(12px); /* Glassmorphism blur effect */
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.15); /* Subtle shadow */
+  border: 1px solid rgba(255, 255, 255, 0.1); /* Light border for depth */
+  transition: opacity 0.3s ease;
+}
+
+.navbar-visible {
+  opacity: 1;
+}
+
+.navbar-hidden {
+  opacity: 0;
+  pointer-events: none; 
+}
+
+/* Rounded edges and margin on large screens */
+@media (min-width: 992px) {
+  .custom-navbar {
+    border-radius: 50px !important; 
+    margin-left: 1.5rem !important;
+    margin-right: 1.5rem !important;
+    margin-top: 1rem !important;
+    margin-bottom: 1rem !important;
+  }
+}
+
+/* No rounding, full-width, and no top margin on small screens */
+@media (max-width: 991.98px) {
+  .custom-navbar {
+    border-radius: 0 !important; /* No rounding */
+    margin-left: 0 !important;
+    margin-right: 0 !important;
+    margin-top: 0 !important; /* Move to topmost position */
+    margin-bottom: 1rem !important;
+  }
+}
+
+.nav-link {
+  font-weight: 500;
+  transition: all 0.3s ease;
+}
+
+.nav-link:hover {
+  transform: translateY(-1px); /* Slight lift effect on hover */
+}
+
+.nav-link.hover-bg-white:hover {
+  color: #ffffff !important;
+}
+
+.navbar-brand {
+  transition: transform 0.3s ease;
+}
+
+.navbar-brand:hover {
+  transform: scale(1.05); /* Subtle zoom on hover */
+}
+
+.btn-primary {
+  background: linear-gradient(45deg, #007bff, #00b7eb); /* Gradient button */
+  border: none;
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.btn-primary:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(0, 123, 255, 0.3);
+}
+
+.btn-outline-light {
+  transition: transform 0.2s ease;
+}
+
+.btn-outline-light:hover {
+  transform: translateY(-2px);
+}
+
+.button-group {
+  margin-left: auto; /* Push buttons to the right */
+  padding-right: 20px; /* Align closer to edge */
+}

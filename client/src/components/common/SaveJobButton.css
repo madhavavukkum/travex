@@ -1,0 +1,18 @@
+.save-job-btn {
+  transition: var(--transition);
+}
+
+.save-job-btn:hover {
+  transform: translateY(-2px);
+}
+
+.save-job-btn.saved {
+  background-color: var(--warning);
+  border-color: var(--warning);
+  color: white;
+}
+
+.save-job-btn.saved:hover {
+  background-color: #e0a800;
+  border-color: #e0a800;
+}
