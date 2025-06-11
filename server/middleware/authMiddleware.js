@@ -17,9 +17,9 @@ const protect = async (req, res, next) => {
   }
 };
 
-const restrictTo = (...roles) => {
+const restrictTo = (...roleIds) => {
   return (req, res, next) => {
-    if (!req.user.roles.some(role => roles.includes(role))) {
+    if (!req.user.roles.some(roleId => roleIds.includes(roleId))) {
       return res.status(403).json({ message: 'Access denied' });
     }
     next();

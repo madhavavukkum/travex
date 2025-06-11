@@ -13,6 +13,7 @@ import SavedJobs from './pages/SavedJobs';
 import Applications from './pages/Applications';
 import Login from './pages/Login';
 import Employees from './pages/Employees';
+import { useState } from 'react';
 
 // ProtectedRoute component to handle role-based access
 const ProtectedRoute = ({ children, allowedRoles }) => {
@@ -23,7 +24,7 @@ const ProtectedRoute = ({ children, allowedRoles }) => {
     return <Navigate to="/login" replace />;
   }
 
-  if (allowedRoles && !allowedRoles.some(role => user.roles.includes(role))) {
+  if (allowedRoles && !allowedRoles.some(roleId => user.roles.includes(roleId))) {
     return <Navigate to="/" replace />;
   }
 
@@ -50,7 +51,7 @@ function App() {
           <Route
             path="/employees"
             element={
-              <ProtectedRoute allowedRoles={['admin']}>
+              <ProtectedRoute allowedRoles={[1]}>
                 <Employees />
               </ProtectedRoute>
             }

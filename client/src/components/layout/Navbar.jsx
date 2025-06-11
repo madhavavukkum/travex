@@ -116,7 +116,7 @@ const Navbar = () => {
             >
               Contact
             </Nav.Link>
-            {user && user.roles.includes('admin') && (
+            {user && user.roles.includes(1) && (
               <Nav.Link
                 as={NavLink}
                 to="/employees"

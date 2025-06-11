@@ -23,14 +23,10 @@ const Login = () => {
   };
 
   useEffect(() => {
-    if (!isLogin) {
-      setEmailValid(formData.email ? validateEmail(formData.email) : null);
-      setPasswordValid(formData.password ? validatePassword(formData.password) : null);
-    } else {
-      setEmailValid(null);
-      setPasswordValid(null);
-    }
-  }, [formData.email, formData.password, isLogin]);
+    // Apply validations in both login and registration modes
+    setEmailValid(formData.email ? validateEmail(formData.email) : null);
+    setPasswordValid(formData.password ? validatePassword(formData.password) : null);
+  }, [formData.email, formData.password]);
 
   const handleChange = (e) => {
     setFormData({ ...formData, [e.target.name]: e.target.value });
@@ -45,7 +41,8 @@ const Login = () => {
     setError('');
     setSuccess('');
 
-    if (!isLogin && (!validateEmail(formData.email) || !validatePassword(formData.password))) {
+    // Check validations before submission in both modes
+    if (!validateEmail(formData.email) || !validatePassword(formData.password)) {
       setError('Please provide a valid email and password.');
       return;
     }
@@ -143,8 +140,8 @@ const Login = () => {
                       </button>
                       <span className="focus-border"></span>
                     </div>
-                    {!isLogin && passwordValid === true && <p className="validation-success">Strong password</p>}
-                    {!isLogin && passwordValid === false && (
+                    {passwordValid === true && <p className="validation-success">Strong password</p>}
+                    {passwordValid === false && (
                       <p className="validation-error">Password must be 8+ characters with uppercase, lowercase, number, and special character</p>
                     )}
                   </div>

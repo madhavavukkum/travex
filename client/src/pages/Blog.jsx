@@ -1,24 +1,56 @@
 import React, { useEffect, useRef, useState } from 'react';
-import { Container, Row, Col, Card, Button, Form, Badge, Nav, Modal } from 'react-bootstrap';
+import { Container, Row, Col, Card, Button, Form, Badge, Nav, Alert } from 'react-bootstrap';
 import { FaHeart, FaShareAlt, FaBookmark, FaArrowUp, FaComments } from 'react-icons/fa';
-import { blogData } from '../data/blogData'; // Adjust the import path as necessary
 import axios from 'axios';
-
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 import 'bootstrap/dist/css/bootstrap.min.css';
+import './Blog.css';
 
 const Blog = () => {
   const tocRefs = useRef({});
   const contentRef = useRef(null);
-  const [comments, setComments] = useState(blogData.comments.map(comment => ({
-    ...comment,
-    likes: 0
-  })));
+  const [blogData, setBlogData] = useState(null);
+  const [comments, setComments] = useState([]);
   const [newComment, setNewComment] = useState('');
-  const [newCommenterName, setNewCommenterName] = useState('');
   const [editingCommentId, setEditingCommentId] = useState(null);
   const [editText, setEditText] = useState('');
-  const [likesCount, setLikesCount] = useState(blogData.likes_count); // State for main post likes
-  const [showCommentPopup, setShowCommentPopup] = useState(false); // State for comment popup
+  const [likesCount, setLikesCount] = useState(0);
+  const [error, setError] = useState('');
+  const [isAuthenticated, setIsAuthenticated] = useState(false);
+
+  // Fetch blog data and comments
+  useEffect(() => {
+    const fetchBlogData = async () => {
+      try {
+        const blogResponse = await axios.get('http://localhost:5000/api/blogs/1');
+        setBlogData(blogResponse.data);
+        setLikesCount(blogResponse.data.likes_count);
+
+        // Fetch comments from the blog document
+        const commentsResponse = await axios.get(`http://localhost:5000/api/comments/${blogResponse.data._id}`);
+        setComments(commentsResponse.data.map(comment => ({
+          id: comment.id,
+          content: comment.content,
+          posted_by: comment.posted_by,
+          posted_at: comment.posted_at,
+          userId: comment.userId,
+          likes: 0,
+        })));
+      } catch (err) {
+        toast.error('Failed to load blog data', { position: "top-right", autoClose: 3000 });
+        console.error(err);
+      }
+    };
+
+    // Check authentication status
+    const token = localStorage.getItem('token');
+    if (token) {
+      setIsAuthenticated(true);
+    }
+
+    fetchBlogData();
+  }, []);
 
   // Smooth scrolling to section
   const scrollToSection = (id) => {
@@ -57,44 +89,50 @@ const Blog = () => {
   // Handle adding a new comment
   const handleAddComment = async (e) => {
     e.preventDefault();
-    if (!newComment.trim() || !newCommenterName.trim()) return;
-
-    const newCommentObj = {
-      id: `temp-${Date.now()}`,
-      content: newComment,
-      posted_by: newCommenterName || 'Anonymous',
-      posted_at: new Date().toISOString(),
-      likes: 0
-    };
-
-    setComments([...comments, newCommentObj]);
-    setNewComment('');
-    setNewCommenterName('');
-    setShowCommentPopup(true); // Show popup on comment submission
+    if (!isAuthenticated) {
+      toast.error('Please log in to post a comment', { position: "top-right", autoClose: 3000 });
+      return;
+    }
+    if (!newComment.trim()) return;
 
     try {
-      await axios.post('http://localhost:5000/api/comments', {
-        text: newComment,
-        author: newCommentObj.posted_by,
-        date: newCommentObj.posted_at,
-      });
-    } catch (error) {
-      console.error('Error sending comment email:', error);
+      const token = localStorage.getItem('token');
+      const response = await axios.post(
+        'http://localhost:5000/api/comments',
+        {
+          blogId: blogData._id,
+          content: newComment,
+        },
+        {
+          headers: { Authorization: `Bearer ${token}` },
+        }
+      );
+
+      const newCommentObj = {
+        id: response.data.id,
+        content: response.data.content,
+        posted_by: response.data.posted_by,
+        posted_at: response.data.posted_at,
+        userId: response.data.userId,
+        likes: 0,
+      };
+
+      setComments([...comments, newCommentObj]);
+      setNewComment('');
+      toast.success('Comment posted successfully!', { position: "top-right", autoClose: 3000 });
+    } catch (err) {
+      toast.error('Failed to post comment', { position: "top-right", autoClose: 3000 });
+      console.error(err);
     }
   };
 
-  // Handle closing the comment popup
-  const handleClosePopup = () => {
-    setShowCommentPopup(false);
-  };
-
-  // Handle editing a comment
+  // Handle editing a comment (client-side only)
   const handleEditComment = (comment) => {
     setEditingCommentId(comment.id);
     setEditText(comment.content);
   };
 
-  // Handle saving edited comment
+  // Handle saving edited comment (client-side only)
   const handleSaveEdit = (id) => {
     if (!editText.trim()) return;
     setComments(
@@ -104,14 +142,16 @@ const Blog = () => {
     );
     setEditingCommentId(null);
     setEditText('');
+    toast.success('Comment updated successfully!', { position: "top-right", autoClose: 3000 });
   };
 
-  // Handle deleting a comment
+  // Handle deleting a comment (client-side only)
   const handleDeleteComment = (id) => {
     setComments(comments.filter((comment) => comment.id !== id));
+    toast.success('Comment deleted successfully!', { position: "top-right", autoClose: 3000 });
   };
 
-  // Handle liking a comment
+  // Handle liking a comment (client-side only)
   const handleLikeComment = (id) => {
     setComments(
       comments.map((comment) =>
@@ -120,154 +160,27 @@ const Blog = () => {
     );
   };
 
-  // Handle liking the main post
+  // Handle liking the main post (client-side only)
   const handleLikePost = () => {
     setLikesCount(likesCount + 1);
   };
 
+  if (!blogData) {
+    return <Container>Loading...</Container>;
+  }
+
   return (
     <>
-      <style>
-        {`
-          .hero-image {
-            height: 500px;
-            background-position: center;
-            background-repeat: no-repeat;
-            background-size: cover;
-            position: relative;
-            border-radius: 10px;
-            box-shadow: 0 10px 30px rgba(0,0,0,0.2);
-            overflow: hidden;
-          }
-          
-          .hero-image::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            right: 0;
-            bottom: 0;
-            background: linear-gradient(to bottom, rgba(0,0,0,0.1), rgba(0,0,0,0.7));
-          }
-          
-          .tag {
-            transition: all 0.3s ease;
-          }
-          
-          .tag:hover {
-            transform: translateY(-3px);
-            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
-          }
-          
-          .comment-card {
-            transition: all 0.3s ease;
-          }
-          
-          .comment-card:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 10px 20px rgba(0,0,0,0.1);
-          }
-          
-          .like-btn:hover {
-            animation: pulse 0.5s;
-          }
-          
-          @keyframes pulse {
-            0% { transform: scale(1); }
-            50% { transform: scale(1.2); }
-            100% { transform: scale(1); }
-          }
-          
-          .author-avatar {
-            width: 60px;
-            height: 60px;
-            object-fit: cover;
-            border-radius: 50%;
-            border: 3px solid white;
-            box-shadow: 0 3px 10px rgba(0,0,0,0.2);
-          }
-          
-          .floating-action-btn {
-            position: fixed;
-            bottom: 30px;
-            right: 30px;
-            z-index: 1000;
-            animation: float 3s ease-in-out infinite;
-          }
-          
-          @keyframes float {
-            0% { transform: translateY(0px); }
-            50% { transform: translateY(-10px); }
-            100% { transform: translateY(0px); }
-          }
-          
-          .blockquote-custom {
-            border-left: 5px solid #007bff;
-            padding-left: 1.5rem;
-            font-style: italic;
-            background-color: #f8f9fa;
-            border-radius: 5px;
-            padding: 1rem;
-            margin: 2rem 0;
-          }
-          
-          .note-card {
-            background-color: #e6f3ff;
-            border-left: 5px solid #007bff;
-            padding: 1rem;
-            border-radius: 5px;
-            margin: 2rem 0;
-          }
-          
-          .gallery-grid img {
-            transition: transform 0.3s ease;
-          }
-          
-          .gallery-grid img:hover {
-            transform: scale(1.05);
-          }
-          
-          .toc {
-            position: sticky;
-            top: 100px;
-            max-height: calc(100vh - 120px);
-            overflow-y: auto;
-          }
-          
-          .toc a {
-            display: block;
-            padding: 0.5rem 1rem;
-            color: #007bff;
-            text-decoration: none;
-            transition: all 0.3s ease;
-          }
-          
-          .toc a:hover {
-            background-color: #f8f9fa;
-            color: #0056b3;
-          }
-          
-          .toc a.active {
-            font-weight: bold;
-            background-color: #e6f3ff;
-          }
-        `}
-      </style>
-
-      {/* Comment Popup */}
-      <Modal show={showCommentPopup} onHide={handleClosePopup} centered>
-        <Modal.Header closeButton>
-          <Modal.Title>Comment Posted!</Modal.Title>
-        </Modal.Header>
-        <Modal.Body>
-          <p>Your comment has been successfully posted.</p>
-        </Modal.Body>
-        <Modal.Footer>
-          <Button variant="primary" onClick={handleClosePopup}>
-            Close
-          </Button>
-        </Modal.Footer>
-      </Modal>
+      <ToastContainer />
+      
+      {/* Error Alert */}
+      {error && (
+        <Container className="my-3">
+          <Alert variant="danger" onClose={() => setError('')} dismissible>
+            {error}
+          </Alert>
+        </Container>
+      )}
 
       {/* Hero Section */}
       <Container className="my-5 animate__animated animate__fadeIn">
@@ -481,24 +394,23 @@ const Blog = () => {
                       <Form onSubmit={handleAddComment}>
                         <Form.Group className="mb-3">
                           <Form.Control
-                            type="text"
-                            placeholder="Your name"
-                            value={newCommenterName}
-                            onChange={(e) => setNewCommenterName(e.target.value)}
-                            className="mb-3"
-                          />
-                          <Form.Control
                             as="textarea"
                             rows={3}
                             placeholder="Share your thoughts..."
                             value={newComment}
                             onChange={(e) => setNewComment(e.target.value)}
+                            disabled={!isAuthenticated}
                           />
                         </Form.Group>
-                        <Button type="submit" variant="primary">
+                        <Button type="submit" variant="primary" disabled={!isAuthenticated}>
                           Post Comment
                         </Button>
                       </Form>
+                      {!isAuthenticated && (
+                        <p className="mt-2 text-muted">
+                          Please <a href="/login">log in</a> to post a comment.
+                        </p>
+                      )}
                     </Card.Body>
                   </Card>
                 </div>
@@ -569,7 +481,6 @@ const Blog = () => {
           </Row>
         </Container>
       </div>
-
 
       {/* Floating Action Button */}
       <div className="floating-action-btn">

@@ -14,17 +14,17 @@ const register = async (req, res) => {
 
     const hashedPassword = await bcrypt.hash(password, 10);
     
-    // Assign 'user' role by default, create role if it doesn't exist
-    let userRole = await Role.findOne({ name: 'user' });
+    // Assign role ID 2 (user) by default
+    let userRole = await Role.findOne({ id: 2 });
     if (!userRole) {
-      userRole = await Role.create({ name: 'user', permissions: ['view_public'] });
+      userRole = await Role.create({ id: 2, name: 'user', permissions: ['read'] });
     }
 
     const user = await User.create({
       username,
       email,
       password: hashedPassword,
-      roles: [userRole._id],
+      roles: [2], // Assign numeric role ID
     });
 
     res.status(201).json({ message: 'User registered successfully' });
@@ -37,7 +37,7 @@ const login = async (req, res) => {
   const { email, password } = req.body;
 
   try {
-    const user = await User.findOne({ email }).populate('roles');
+    const user = await User.findOne({ email });
     if (!user) {
       return res.status(400).json({ message: 'Invalid credentials' });
     }
@@ -48,14 +48,14 @@ const login = async (req, res) => {
     }
 
     const token = jwt.sign(
-      { userId: user._id, username: user.username, email: user.email, roles: user.roles.map(role => role.name) },
+      { userId: user._id, username: user.username, email: user.email, roles: user.roles },
       process.env.JWT_SECRET,
       { expiresIn: '1h' }
     );
 
     res.json({
       token,
-      user: { id: user._id, username: user.username, email: user.email, roles: user.roles.map(role => role.name) },
+      user: { id: user._id, username: user.username, email: user.email, roles: user.roles },
     });
   } catch (error) {
     res.status(500).json({ message: 'Server error' });
