@@ -1,13 +1,26 @@
 import { useEffect, useRef, useState } from 'react';
 import { Container, Navbar as BsNavbar, Nav, Button } from 'react-bootstrap';
 import { FaPlane, FaUserCircle, FaBars } from 'react-icons/fa';
-import { Link, NavLink, useLocation } from 'react-router-dom';
+import { Link, NavLink, useLocation, useNavigate } from 'react-router-dom';
 import './Navbar.css';
 
 const Navbar = () => {
   const [isVisible, setIsVisible] = useState(true);
   const timeoutRef = useRef(null);
   const location = useLocation();
+  const navigate = useNavigate();
+  const [user, setUser] = useState(null);
+
+  useEffect(() => {
+    // Check for user in localStorage
+    const storedUser = JSON.parse(localStorage.getItem('user'));
+    const token = localStorage.getItem('token');
+    if (storedUser && token) {
+      setUser(storedUser);
+    } else {
+      setUser(null);
+    }
+  }, [location]);
 
   useEffect(() => {
     setIsVisible(true);
@@ -41,6 +54,13 @@ const Navbar = () => {
       clearTimeout(timeoutRef.current);
     };
   }, [location]);
+
+  const handleLogout = () => {
+    localStorage.removeItem('token');
+    localStorage.removeItem('user');
+    setUser(null);
+    navigate('/');
+  };
 
   return (
     <BsNavbar
@@ -96,17 +116,17 @@ const Navbar = () => {
             >
               Contact
             </Nav.Link>
+            {user && user.roles.includes('admin') && (
+              <Nav.Link
+                as={NavLink}
+                to="/employees"
+                className="mx-3 py-2 px-3 rounded-3 transition-colors duration-200 text-white bg-opacity-10 hover:bg-light hover:bg-opacity-25"
+              >
+                Employees
+              </Nav.Link>
+            )}
           </Nav>
           <div className="d-flex align-items-center button-group">
-            <Button
-              variant="outline-light"
-              className="me-4 rounded-pill px-3 py-2 fw-medium"
-              as={Link}
-              to="/login"
-            >
-              <FaUserCircle className="me-2" />
-              Login
-            </Button>
             <Button
               variant="primary"
               className="rounded-pill px-4 py-2 fw-medium bg-gradient shadow-sm"
@@ -115,6 +135,30 @@ const Navbar = () => {
             >
               Book Now
             </Button>
+            {user ? (
+              <>
+                <span className="text-white ms-4 fw-medium">
+                  Hi, Welcome {user.username}!
+                </span>
+                <Button
+                  variant="outline-light"
+                  className="ms-2 rounded-pill px-3 py-2 fw-medium"
+                  onClick={handleLogout}
+                >
+                  Logout
+                </Button>
+              </>
+            ) : (
+              <Button
+                variant="outline-light"
+                className="ms-4 rounded-pill px-3 py-2 fw-medium"
+                as={Link}
+                to="/login"
+              >
+                <FaUserCircle className="me-2" />
+                Login
+              </Button>
+            )}
           </div>
         </BsNavbar.Collapse>
       </Container>

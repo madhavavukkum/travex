@@ -283,13 +283,13 @@ const Blog = () => {
                 className="author-avatar me-3"
               />
               <div>
-                <h5 className="mb-0">{blogData.created_by}</h5>
+                <h5 className="mb-0 text-white">{blogData.created_by}</h5>
                 <small className="text-light">
                   Posted on {new Date(blogData.created_at).toLocaleDateString()}
                 </small>
               </div>
             </div>
-            <h1 className="display-4 fw-bold mb-3">{blogData.title}</h1>
+            <h1 className="display-4 fw-bold mb-3 text-white">{blogData.title}</h1>
             <Badge bg="warning" text="dark" className="fs-6 p-2">
               {blogData.category}
             </Badge>

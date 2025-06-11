@@ -1,0 +1,244 @@
+.login-page {
+  position: relative;
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  padding: 80px 0;
+  color: #fff;
+  overflow: hidden;
+}
+
+.background-container {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-image: url("/login.jpg");
+  background-size: auto; /* Display image at original size */
+  background-position: center; /* Center the image */
+  background-repeat: no-repeat; /* Prevent tiling */
+  z-index: 0;
+}
+
+.login-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  z-index: 1;
+}
+
+.container {
+  position: relative;
+  z-index: 2;
+}
+
+.glass-card {
+  border-radius: 24px;
+  overflow: hidden;
+  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.3);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  transition: transform 0.5s ease;
+}
+
+.glass-content {
+  background-color: rgba(0, 0, 0, 0.3);
+  backdrop-filter: blur(15px);
+  padding: 20px;
+  min-height: 100%;
+}
+
+.heading-text {
+  font-weight: 700;
+  font-size: 2.5rem;
+  background: linear-gradient(90deg, #ffffff, #cccccc);
+  background-clip: text;
+  -webkit-background-clip: text;
+  color: transparent;
+  margin-bottom: 20px;
+  text-align: center;
+}
+
+.error-message {
+  color: #ff6b6b;
+  text-align: center;
+  margin-bottom: 20px;
+  background: rgba(255, 107, 107, 0.1);
+  padding: 10px;
+  border-radius: 8px;
+}
+
+.success-message {
+  color: #51cf66;
+  text-align: center;
+  margin-bottom: 20px;
+  background: rgba(81, 207, 102, 0.1);
+  padding: 10px;
+  border-radius: 8px;
+}
+
+.validation-success {
+  color: #51cf66;
+  font-size: 12px;
+  margin-top: 4px;
+  margin-left: 12px;
+}
+
+.validation-error {
+  color: #ff6b6b;
+  font-size: 12px;
+  margin-top: 4px;
+  margin-left: 12px;
+}
+
+.login-form {
+  margin-top: 32px;
+}
+
+.form-group {
+  margin-bottom: 24px;
+  position: relative;
+}
+
+.floating-input {
+  position: relative;
+  margin-bottom: 8px;
+}
+
+.floating-input input {
+  width: 100%;
+  padding: 16px 40px 16px 40px; /* Adjusted for eye icon */
+  font-size: 16px;
+  color: #fff;
+  background-color: rgba(255, 255, 255, 0.08);
+  border: none;
+  border-radius: 8px;
+  outline: none;
+  transition: all 0.3s ease;
+}
+
+.floating-input input:focus {
+  background-color: rgba(255, 255, 255, 0.12);
+  box-shadow: 0 0 0 2px rgba(255, 255, 255, 0.2);
+}
+
+.floating-input label {
+  position: absolute;
+  top: 16px;
+  left: 16px;
+  color: rgba(255, 255, 255, 0.6);
+  font-size: 16px;
+  transition: all 0.3s ease;
+  display: flex;
+  align-items: center;
+}
+
+.floating-input input:focus + label,
+.floating-input input:not(:placeholder-shown) + label {
+  top: -10px;
+  left: 10px;
+  font-size: 12px;
+  background-color: rgba(0, 0, 0, 0.5);
+  padding: 2px 8px;
+  border-radius: 4px;
+  color: #fff;
+}
+
+.input-icon {
+  margin-right: 8px;
+}
+
+.toggle-password {
+  position: absolute;
+  top: 50%;
+  right: 16px;
+  transform: translateY(-50%);
+  background: none;
+  border: none;
+  color: rgba(255, 255, 255, 0.6);
+  font-size: 18px;
+  cursor: pointer;
+  transition: color 0.3s ease;
+}
+
+.toggle-password:hover {
+  color: #fff;
+}
+
+.focus-border {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 0;
+  height: 2px;
+  background: linear-gradient(90deg, #4f9cf9, #8a65ff);
+  transition: width 0.3s ease;
+}
+
+.floating-input input:focus ~ .focus-border {
+  width: 100%;
+}
+
+.submit-btn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  padding: 16px;
+  background: linear-gradient(135deg, #4f9cf9, #8a65ff);
+  color: white;
+  border: none;
+  border-radius: 8px;
+  font-size: 16px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  box-shadow: 0 4px 15px rgba(79, 156, 249, 0.3);
+}
+
+.submit-btn:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 6px 20px rgba(79, 156, 249, 0.4);
+}
+
+.submit-btn:active {
+  transform: translateY(1px);
+}
+
+.toggle-btn {
+  background: none;
+  border: none;
+  color: rgba(255, 255, 255, 0.7);
+  font-size: 14px;
+  padding: 0;
+  margin-top: 16px;
+  transition: color 0.3s ease;
+}
+
+.toggle-btn:hover {
+  color: #fff;
+  text-decoration: underline;
+}
+
+@media (max-width: 767.98px) {
+  .login-page {
+    padding: 40px 0;
+  }
+  .glass-card {
+    border-radius: 16px;
+  }
+  .glass-content {
+    padding: 24px !important;
+  }
+  .heading-text {
+    font-size: 2rem;
+  }
+}
+
+@media (max-width: 575.98px) {
+  .heading-text {
+    font-size: 1.8rem;
+  }
+}

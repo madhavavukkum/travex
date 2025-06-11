@@ -31,12 +31,12 @@ export const blogData = {
       text: "Kyoto’s ancient temples, cherry blossoms, and traditional tea houses offer a serene escape into Japan’s cultural heart.",
       images: [
         {
-          src: "https://images.unsplash.com/photo-1542051841857-7347e78a9a5d?auto=format&fit=crop&w=1000&q=80",
+          src: "https://images.unsplash.com/photo-1493976040374-85c8e12f0c0e?q=80&w=2070&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
           alt: "Kyoto Temple",
           cols: 6
         },
         {
-          src: "https://images.unsplash.com/photo-1493976040374-85c8e12f2c0e?auto=format&fit=crop&w=1000&q=80",
+          src: "https://images.unsplash.com/photo-1619441207978-3d326c46e2c9?q=80&w=2069&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
           alt: "Kyoto Gardens",
           cols: 6
         }
@@ -49,17 +49,17 @@ export const blogData = {
       text: "Nestled in the Canadian Rockies, Banff offers turquoise lakes, towering peaks, and endless outdoor adventures.",
       images: [
         {
-          src: "https://images.unsplash.com/photo-1501555088652-021faa106b9b?auto=format&fit=crop&w=800&q=80",
+          src: "https://images.unsplash.com/photo-1561134643-668f9057cce4?q=80&w=1974&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
           alt: "Banff Lake",
           cols: 4
         },
         {
-          src: "https://images.unsplash.com/photo-1464820453369-31d2c0b651af?auto=format&fit=crop&w=800&q=80",
+          src: "https://plus.unsplash.com/premium_photo-1708575888205-20da84f6af45?q=80&w=1935&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
           alt: "Banff Mountains",
           cols: 4
         },
         {
-          src: "https://images.unsplash.com/photo-1516826957135-2357b0f3a298?auto=format&fit=crop&w=800&q=80",
+          src: "https://images.unsplash.com/photo-1493931585036-a789ff27398b?q=80&w=2070&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
           alt: "Banff Forest",
           cols: 4
         }
@@ -73,7 +73,7 @@ export const blogData = {
       text: "From Table Mountain to vibrant markets, Cape Town blends natural beauty with cultural richness.",
       images: [
         {
-          src: "https://images.unsplash.com/photo-1580060702248-c8a1a84d9360?auto=format&fit=crop&w=2070&q=80",
+          src: "https://plus.unsplash.com/premium_photo-1697730061063-ad499e343f26?q=80&w=1932&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
           alt: "Cape Town",
           cols: 12
         }
@@ -86,12 +86,12 @@ export const blogData = {
       text: "Chase the Northern Lights and explore geothermal wonders in Iceland’s quirky capital.",
       images: [
         {
-          src: "https://images.unsplash.com/photo-1501436513145-30f24e19fcc8?auto=format&fit=crop&w=1000&q=80",
+          src: "https://images.unsplash.com/photo-1474690870753-1b92efa1f2d8?q=80&w=2070&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
           alt: "Reykjavik Northern Lights",
           cols: 6
         },
         {
-          src: "https://images.unsplash.com/photo-1500048993953-d23a436266cf?auto=format&fit=crop&w=1000&q=80",
+          src: "https://images.unsplash.com/photo-1606130503037-6a8ef67c9d2d?q=80&w=1925&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
           alt: "Reykjavik City",
           cols: 6
         }
@@ -110,12 +110,12 @@ export const blogData = {
           cols: 4
         },
         {
-          src: "https://images.unsplash.com/photo-1504615754609-326392858bec?auto=format&fit=crop&w=800&q=80",
+          src: "https://images.unsplash.com/photo-1543385426-191664295b58?q=80&w=1990&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
           alt: "Machu Picchu Mountains",
           cols: 4
         },
         {
-          src: "https://images.unsplash.com/photo-1542051841857-7347e78a9a5d?auto=format&fit=crop&w=800&q=80",
+          src: "https://plus.unsplash.com/premium_photo-1694475501155-2f344cea9eb3?q=80&w=2069&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
           alt: "Machu Picchu Trails",
           cols: 4
         }
@@ -128,7 +128,7 @@ export const blogData = {
       text: "Colorful cliffside villages and turquoise waters make the Amalfi Coast a Mediterranean gem.",
       images: [
         {
-          src: "https://images.unsplash.com/photo-1534308983496-4fabb1a015ee?auto=format&fit=crop&w=2070&q=80",
+          src: "https://plus.unsplash.com/premium_photo-1676608101886-b46ded5ea20a?q=80&w=2070&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
           alt: "Amalfi Coast",
           cols: 12
         }
@@ -142,12 +142,12 @@ export const blogData = {
       text: "Bali’s lush jungles, vibrant culture, and pristine beaches offer something for every traveler.",
       images: [
         {
-          src: "https://images.unsplash.com/photo-1539367628448-4b5f7e2360b5?auto=format&fit=crop&w=1000&q=80",
+          src: "https://plus.unsplash.com/premium_photo-1677829177642-30def98b0963?q=80&w=2070&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
           alt: "Bali Temple",
           cols: 6
         },
         {
-          src: "https://images.unsplash.com/photo-1518548419970-58e3b4079ab2?auto=format&fit=crop&w=1000&q=80",
+          src: "https://images.unsplash.com/photo-1577717903315-1691ae25ab3f?q=80&w=2070&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
           alt: "Bali Beach",
           cols: 6
         }
@@ -160,17 +160,17 @@ export const blogData = {
       text: "From fjords to hobbit-like landscapes, New Zealand is a paradise for nature lovers and adventure seekers.",
       images: [
         {
-          src: "https://images.unsplash.com/photo-1507697364471-8b16db9e46e0?auto=format&fit=crop&w=800&q=80",
+          src: "https://images.unsplash.com/photo-1473160330398-3aa3dbdf3117?q=80&w=2070&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
           alt: "New Zealand Fjords",
           cols: 4
         },
         {
-          src: "https://images.unsplash.com/photo-1444664435506-1a3ed3e7dafa?auto=format&fit=crop&w=800&q=80",
+          src: "https://plus.unsplash.com/premium_photo-1661885575763-1d5244d3f1e3?q=80&w=2134&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
           alt: "New Zealand Mountains",
           cols: 4
         },
         {
-          src: "https://images.unsplash.com/photo-1506469716570-1f2a4b5aaf24?auto=format&fit=crop&w=800&q=80",
+          src: "https://plus.unsplash.com/premium_photo-1661882273771-2d9a593a2a60?q=80&w=2070&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
           alt: "New Zealand Lakes",
           cols: 4
         }
@@ -184,7 +184,7 @@ export const blogData = {
       text: "Immerse yourself in the vibrant souks, historic palaces, and colorful gardens of Marrakech.",
       images: [
         {
-          src: "https://images.unsplash.com/photo-1512428813834-c7028d80037a?auto=format&fit=crop&w=2070&q=80",
+          src: "https://images.unsplash.com/photo-1719084198651-5ac167cb3e6e?q=80&w=2069&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
           alt: "Marrakech",
           cols: 12
         }
