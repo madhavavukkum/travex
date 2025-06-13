@@ -16,19 +16,23 @@ const Blog = () => {
   const [editingCommentId, setEditingCommentId] = useState(null);
   const [editText, setEditText] = useState('');
   const [likesCount, setLikesCount] = useState(0);
+  const [hasLiked, setHasLiked] = useState(false);
   const [error, setError] = useState('');
   const [isAuthenticated, setIsAuthenticated] = useState(false);
 
-  // Fetch blog data and comments
+  // Fetch blog data, comments, and like status
   useEffect(() => {
     const fetchBlogData = async () => {
       try {
-        const blogResponse = await axios.get('http://localhost:5000/api/blogs/1');
+        const token = localStorage.getItem('token');
+        const config = token ? { headers: { Authorization: `Bearer ${token}` } } : {};
+
+        const blogResponse = await axios.get('http://localhost:5000/api/blogs/1', config);
         setBlogData(blogResponse.data);
         setLikesCount(blogResponse.data.likes_count);
 
-        // Fetch comments from the blog document
-        const commentsResponse = await axios.get(`http://localhost:5000/api/comments/${blogResponse.data._id}`);
+        // Fetch comments
+        const commentsResponse = await axios.get(`http://localhost:5000/api/comments/${blogResponse.data.id}`);
         setComments(commentsResponse.data.map(comment => ({
           id: comment.id,
           content: comment.content,
@@ -37,17 +41,19 @@ const Blog = () => {
           userId: comment.userId,
           likes: 0,
         })));
+
+        // Check if user has liked the blog (only if authenticated)
+        if (token) {
+          setIsAuthenticated(true);
+          const userId = JSON.parse(atob(token.split('.')[1])).userId; // Decode JWT to get userId
+          const hasLiked = blogResponse.data.likes.some(like => like.userId.toString() === userId);
+          setHasLiked(hasLiked);
+        }
       } catch (err) {
         toast.error('Failed to load blog data', { position: "top-right", autoClose: 3000 });
         console.error(err);
       }
     };
-
-    // Check authentication status
-    const token = localStorage.getItem('token');
-    if (token) {
-      setIsAuthenticated(true);
-    }
 
     fetchBlogData();
   }, []);
@@ -90,7 +96,12 @@ const Blog = () => {
   const handleAddComment = async (e) => {
     e.preventDefault();
     if (!isAuthenticated) {
-      toast.error('Please log in to post a comment', { position: "top-right", autoClose: 3000 });
+      toast.error(
+        <div>
+          Please <a href="/login">log in</a> to post a comment
+        </div>,
+        { position: "top-right", autoClose: 3000 }
+      );
       return;
     }
     if (!newComment.trim()) return;
@@ -100,7 +111,7 @@ const Blog = () => {
       const response = await axios.post(
         'http://localhost:5000/api/comments',
         {
-          blogId: blogData._id,
+          blogId: blogData.id,
           content: newComment,
         },
         {
@@ -121,7 +132,8 @@ const Blog = () => {
       setNewComment('');
       toast.success('Comment posted successfully!', { position: "top-right", autoClose: 3000 });
     } catch (err) {
-      toast.error('Failed to post comment', { position: "top-right", autoClose: 3000 });
+      const errorMessage = err.response?.data?.message || 'Failed to post comment';
+      toast.error(errorMessage, { position: "top-right", autoClose: 3000 });
       console.error(err);
     }
   };
@@ -160,9 +172,37 @@ const Blog = () => {
     );
   };
 
-  // Handle liking the main post (client-side only)
-  const handleLikePost = () => {
-    setLikesCount(likesCount + 1);
+  // Handle toggling like for the blog post
+  const handleLikePost = async () => {
+    if (!isAuthenticated) {
+      toast.error(
+        <div>
+          Please <a href="/login">log in</a> to like this post
+        </div>,
+        { position: "top-right", autoClose: 3000 }
+      );
+      return;
+    }
+
+    try {
+      const token = localStorage.getItem('token');
+      const response = await axios.post(
+        'http://localhost:5000/api/likes',
+        { blogId: blogData.id },
+        { headers: { Authorization: `Bearer ${token}` } }
+      );
+
+      setLikesCount(response.data.likes_count);
+      setHasLiked(response.data.liked);
+      toast.success(`Post ${response.data.liked ? 'liked' : 'unliked'} successfully!`, {
+        position: "top-right",
+        autoClose: 3000,
+      });
+    } catch (err) {
+      const errorMessage = err.response?.data?.message || 'Failed to toggle like';
+      toast.error(errorMessage, { position: "top-right", autoClose: 3000 });
+      console.error(err);
+    }
   };
 
   if (!blogData) {
@@ -236,7 +276,11 @@ const Blog = () => {
                     ))}
                   </div>
                   <div>
-                    <Button variant="outline-danger" className="like-btn" onClick={handleLikePost}>
+                    <Button
+                      variant={hasLiked ? 'danger' : 'outline-danger'}
+                      className="like-btn"
+                      onClick={handleLikePost}
+                    >
                       <FaHeart className="me-1" /> {likesCount} Likes
                     </Button>
                   </div>
@@ -399,18 +443,12 @@ const Blog = () => {
                             placeholder="Share your thoughts..."
                             value={newComment}
                             onChange={(e) => setNewComment(e.target.value)}
-                            disabled={!isAuthenticated}
                           />
                         </Form.Group>
-                        <Button type="submit" variant="primary" disabled={!isAuthenticated}>
+                        <Button type="submit" variant="primary">
                           Post Comment
                         </Button>
                       </Form>
-                      {!isAuthenticated && (
-                        <p className="mt-2 text-muted">
-                          Please <a href="/login">log in</a> to post a comment.
-                        </p>
-                      )}
                     </Card.Body>
                   </Card>
                 </div>
@@ -459,7 +497,7 @@ const Blog = () => {
                       bg={
                         post.category === 'Travel Tips'
                           ? 'info'
-                          : post.category === 'Beaches'
+                        : post.category === 'Beaches'
                           ? 'success'
                           : 'warning'
                       }

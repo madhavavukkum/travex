@@ -1,4 +1,3 @@
-// models/Blog.js
 const mongoose = require('mongoose');
 
 const blogSchema = new mongoose.Schema({
@@ -40,6 +39,7 @@ const blogSchema = new mongoose.Schema({
       id: { type: Number, required: true },
       content: String,
       posted_by: String,
+      userId: { type: mongoose.Schema.Types.ObjectId, ref: 'User' },
       posted_at: Date,
     },
   ],
